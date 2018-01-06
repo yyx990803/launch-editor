@@ -36,7 +36,7 @@ launch(
 
 ### Middleware
 
-An express/webpack-dev-server compatible middleware is also available:
+An express/connect/webpack-dev-server compatible middleware is also available:
 
 ``` js
 const launchMiddleware = require('launch-editor-middleware')

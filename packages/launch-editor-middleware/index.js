@@ -1,11 +1,13 @@
+const url = require('url')
 const launch = require('launch-editor')
 const lineNumberRE = /:(\d+)$/
 
 module.exports = (specifiedEditor, onErrorCallback) => {
   return function launchEditorMiddleware (req, res, next) {
-    const { file } = req.query
+    const { file } = url.parse(req.url, true).query || {}
     if (!file) {
-      res.status(500).end(`launch-editor-middleware: required query param "file" is missing.`)
+      res.statusCode = 500
+      res.end(`launch-editor-middleware: required query param "file" is missing.`)
     } else {
       const fileName = file.replace(lineNumberRE, '')
       const lineNumberMatch = file.match(lineNumberRE)
