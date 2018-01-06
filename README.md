@@ -55,3 +55,19 @@ To launch files, send requests to the server like the following:
 ```
 /__open-in-editor?file=src/main.js:13:24
 ```
+
+### Supported editors
+
+| Value | Editor | 
+|--------|------|
+| `sublime` | Sublime Text |
+| `atom` | Atom Editor |
+| `code` | Visual Studio Code |
+| `webstorm` | WebStorm |
+| `phpstorm` | PhpStorm |
+| `idea14ce` | IDEA 14 CE |
+| `vim` | Vim |
+| `emacs` | Emacs |
+| `visualstudio` | Visual Studio |
+| `pycharm` | PyCharm |
+| `notepad++` | Notepad++ (windows only) |
