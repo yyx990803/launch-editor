@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^2.5.1",
+    "lint-staged": "^6.0.0",
+    "yorkie": "^1.0.1"
+  }
+}
