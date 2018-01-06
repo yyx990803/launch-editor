@@ -21,10 +21,9 @@ On the other hand,`react-dev-utils` includes many other utilities and dependenci
 const launch = require('launch-editor')
 
 launch(
-  // filename
-  'foo.js',
-  // lineNumber
-  13,
+  // filename:line:column
+  // both line and column are optional
+  'foo.js:12:34',
   // try specific editor bin first (optional)
   'code',
   // callback if failed to launch (optional)
@@ -52,5 +51,5 @@ The middleware factory function accepts two optional arguments:
 To launch files, send requests to the server like the following:
 
 ```
-/__open-in-editor?file=src/main.js:13
+/__open-in-editor?file=src/main.js:13:24
 ```

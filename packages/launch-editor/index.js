@@ -12,10 +12,10 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const chalk = require('chalk')
-const child_process = require('child_process')
+const childProcess = require('child_process')
 
 const guessEditor = require('./guess')
-const getArgumentsForLineNumber = require('./get-args')
+const getArgumentsForPosition = require('./get-args')
 
 function wrapErrorCallback (cb) {
   return (fileName, errorMessage) => {
@@ -38,23 +38,35 @@ function wrapErrorCallback (cb) {
 
 function isTerminalEditor (editor) {
   switch (editor) {
-  case 'vim':
-  case 'emacs':
-  case 'nano':
-    return true
+    case 'vim':
+    case 'emacs':
+    case 'nano':
+      return true
   }
   return false
 }
 
-let _childProcess = null
-function launchEditor (fileName, lineNumber, specifiedEditor, onErrorCallback) {
-  if (!fs.existsSync(fileName)) {
-    return
+const positionRE = /:(\d+)(:(\d+))?$/
+function parseFile (file) {
+  const fileName = file.replace(positionRE, '')
+  const match = file.match(positionRE)
+  const lineNumber = match && match[1]
+  const columnNumber = match && match[3]
+  return {
+    fileName,
+    lineNumber,
+    columnNumber
   }
+}
 
-  // Sanitize lineNumber to prevent malicious use on win32
-  // via: https://github.com/nodejs/node/blob/c3bb4b1aa5e907d489619fb43d233c3336bfc03d/lib/child_process.js#L333
-  if (lineNumber && isNaN(lineNumber)) {
+let _childProcess = null
+
+function launchEditor (file, specifiedEditor, onErrorCallback) {
+  const parsed = parseFile(file)
+  let { fileName } = parsed
+  const { lineNumber, columnNumber } = parsed
+
+  if (!fs.existsSync(fileName)) {
     return
   }
 
@@ -65,7 +77,7 @@ function launchEditor (fileName, lineNumber, specifiedEditor, onErrorCallback) {
 
   onErrorCallback = wrapErrorCallback(onErrorCallback)
 
-  let [editor, ...args] = guessEditor(specifiedEditor)
+  const [editor, ...args] = guessEditor(specifiedEditor)
   if (!editor) {
     onErrorCallback(fileName, null)
     return
@@ -85,11 +97,9 @@ function launchEditor (fileName, lineNumber, specifiedEditor, onErrorCallback) {
     fileName = path.relative('', fileName)
   }
 
-  const workspace = null
   if (lineNumber) {
-    args = args.concat(
-      getArgumentsForLineNumber(editor, fileName, lineNumber, workspace)
-    )
+    const extraArgs = getArgumentsForPosition(editor, fileName, lineNumber, columnNumber)
+    args.push.apply(args, extraArgs)
   } else {
     args.push(fileName)
   }
@@ -104,13 +114,13 @@ function launchEditor (fileName, lineNumber, specifiedEditor, onErrorCallback) {
   if (process.platform === 'win32') {
     // On Windows, launch the editor in a shell because spawn can only
     // launch .exe files.
-    _childProcess = child_process.spawn(
+    _childProcess = childProcess.spawn(
       'cmd.exe',
       ['/C', editor].concat(args),
       { stdio: 'inherit' }
     )
   } else {
-    _childProcess = child_process.spawn(editor, args, { stdio: 'inherit' })
+    _childProcess = childProcess.spawn(editor, args, { stdio: 'inherit' })
   }
   _childProcess.on('exit', function (errorCode) {
     _childProcess = null

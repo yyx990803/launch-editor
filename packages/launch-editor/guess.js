@@ -1,6 +1,6 @@
 const path = require('path')
 const shellQuote = require('shell-quote')
-const child_process = require('child_process')
+const childProcess = require('child_process')
 
 // Map from full process name to binary that starts the process
 // We can't just re-use full process name, because it will spawn a new instance
@@ -18,7 +18,7 @@ module.exports = function guessEditor (specifiedEditor) {
   // `Get-Process` on Windows
   try {
     if (process.platform === 'darwin') {
-      const output = child_process.execSync('ps x').toString()
+      const output = childProcess.execSync('ps x').toString()
       const processNames = Object.keys(COMMON_EDITORS_OSX)
       for (let i = 0; i < processNames.length; i++) {
         const processName = processNames[i]
@@ -27,7 +27,7 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     } else if (process.platform === 'win32') {
-      const output = child_process
+      const output = childProcess
         .execSync('powershell -Command "Get-Process | Select-Object Path"', {
           stdio: ['pipe', 'pipe', 'ignore']
         })
@@ -50,7 +50,7 @@ module.exports = function guessEditor (specifiedEditor) {
       // --no-heading No header line
       // x List all processes owned by you
       // -o comm Need only names column
-      const output = child_process
+      const output = childProcess
         .execSync('ps x --no-heading -o comm --sort=comm')
         .toString()
       const processNames = Object.keys(COMMON_EDITORS_LINUX)
