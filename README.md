@@ -4,6 +4,8 @@ Open file with line numbers in editor from Node.js.
 
 The main functionality is extracted from [react-dev-utils](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-dev-utils/launchEditor.js) with slight modifications so that it can be used as a standalone package. The original source code is licensed under MIT.
 
+Also added column number support.
+
 ## Why
 
 There are also a few other existing packages with the same purpose:
