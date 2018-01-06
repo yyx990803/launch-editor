@@ -13,7 +13,7 @@ There are also a few other existing packages with the same purpose:
 
 However, both expects env variables like `EDITOR` to be set in order to open files. This package infers the editor to open by checking current running processes before falling back to env variables.
 
-On the other hand,`react-dev-tools` includes many other utilities and dependencies and is thus not suitable for standalone usage.
+On the other hand,`react-dev-utils` includes many other utilities and dependencies and is thus not suitable for standalone usage.
 
 ## Usage
 
