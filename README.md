@@ -45,10 +45,11 @@ const launchMiddleware = require('launch-editor-middleware')
 app.use('/__open-in-editor', launchMiddleware())
 ```
 
-The middleware factory function accepts two optional arguments:
+The middleware factory function accepts the following arguments (all optional, the callback can be in any position as long as it's the last argument):
 
-1. a specific editor bin to try first.
-2. a callback when it fails to launch the editor.
+1. A specific editor bin to try first. Defaults to inferring from running processes, then fallback to env variables like `EDITOR` and `VISUAL`.
+2. The root directory of source files, in case the file path is relative. Defaults to `process.cwd()`.
+3. a callback when it fails to launch the editor.
 
 To launch files, send requests to the server like the following:
 
