@@ -7,7 +7,7 @@ module.exports = {
   'phpstorm.sh': 'phpstorm',
   'pycharm.sh': 'pycharm',
   'rubymine.sh': 'rubymine',
-  sublime_text: 'sublime_text',
+  sublime_text: 'subl',
   vim: 'vim',
   'webstorm.sh': 'webstorm'
 }
