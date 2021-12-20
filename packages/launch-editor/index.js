@@ -11,7 +11,7 @@
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-const chalk = require('chalk')
+const colors = require('picocolors')
 const childProcess = require('child_process')
 
 const guessEditor = require('./guess')
@@ -21,14 +21,14 @@ function wrapErrorCallback (cb) {
   return (fileName, errorMessage) => {
     console.log()
     console.log(
-      chalk.red('Could not open ' + path.basename(fileName) + ' in the editor.')
+      colors.red('Could not open ' + path.basename(fileName) + ' in the editor.')
     )
     if (errorMessage) {
       if (errorMessage[errorMessage.length - 1] !== '.') {
         errorMessage += '.'
       }
       console.log(
-        chalk.red('The editor process exited with an error: ' + errorMessage)
+        colors.red('The editor process exited with an error: ' + errorMessage)
       )
     }
     console.log()
