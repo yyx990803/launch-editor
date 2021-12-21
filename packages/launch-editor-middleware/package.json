@@ -1,6 +1,6 @@
 {
   "name": "launch-editor-middleware",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "express middleware for launching editor",
   "main": "index.js",
   "repository": {
@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/yyx990803/launch-editor#readme",
   "dependencies": {
-    "launch-editor": "^2.2.1"
+    "launch-editor": "^2.3.0"
   }
 }
