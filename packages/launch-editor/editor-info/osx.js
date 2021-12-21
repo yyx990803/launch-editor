@@ -5,6 +5,8 @@ module.exports = {
   '/Applications/Brackets.app/Contents/MacOS/Brackets': 'brackets',
   '/Applications/Sublime Text.app/Contents/MacOS/Sublime Text':
     '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl',
+  '/Applications/Sublime Text.app/Contents/MacOS/sublime_text':
+    '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl',
   '/Applications/Sublime Text 2.app/Contents/MacOS/Sublime Text 2':
     '/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl',
   '/Applications/Sublime Text Dev.app/Contents/MacOS/Sublime Text':
