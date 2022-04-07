@@ -1,7 +1,7 @@
 const path = require('path')
 const shellQuote = require('shell-quote')
 const childProcess = require('child_process')
-
+const iconv = require('iconv-lite')
 // Map from full process name to binary that starts the process
 // We can't just re-use full process name, because it will spawn a new instance
 // of the app every time
@@ -27,11 +27,19 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     } else if (process.platform === 'win32') {
-      const output = childProcess
-        .execSync('powershell -Command "Get-Process | Select-Object Path"', {
-          stdio: ['pipe', 'pipe', 'ignore']
-        })
-        .toString()
+      const output = iconv.decode(
+        new Buffer(
+          childProcess.execSync(
+            'powershell -Command "Get-Process | Select-Object Path"',
+            {
+              stdio: ["pipe", "pipe", "ignore"],
+              encoding: "binary",
+            }
+          ),
+          "binary"
+        ),
+        "cp936"
+      )
       const runningProcesses = output.split('\r\n')
       for (let i = 0; i < runningProcesses.length; i++) {
         // `Get-Process` sometimes returns empty lines
