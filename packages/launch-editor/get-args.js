@@ -50,6 +50,9 @@ module.exports = function getArgumentsForPosition (
     case 'webstorm':
     case 'webstorm64':
       return ['--line', lineNumber, fileName]
+    // Just pass args if the user chose the CUSTOM_EDITOR escape hatch
+    case 'CUSTOM_EDITOR':
+      return [fileName, lineNumber, columnNumber]
   }
 
   // For all others, drop the lineNumber until we have

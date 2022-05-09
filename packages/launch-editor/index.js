@@ -77,7 +77,10 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
 
   onErrorCallback = wrapErrorCallback(onErrorCallback)
 
-  const [editor, ...args] = guessEditor(specifiedEditor)
+  const result = guessEditor(specifiedEditor)
+  let [editor] = result
+  const [, ...args] = result
+
   if (!editor) {
     onErrorCallback(fileName, null)
     return
@@ -102,6 +105,10 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     args.push.apply(args, extraArgs)
   } else {
     args.push(fileName)
+  }
+
+  if (editor === 'CUSTOM_EDITOR') {
+    editor = process.env.CUSTOM_EDITOR
   }
 
   if (_childProcess && isTerminalEditor(editor)) {

@@ -13,6 +13,7 @@ module.exports = function guessEditor (specifiedEditor) {
   if (specifiedEditor) {
     return shellQuote.parse(specifiedEditor)
   }
+
   // We can find out which editor is currently running by:
   // `ps x` on macOS and Linux
   // `Get-Process` on Windows
@@ -63,6 +64,11 @@ module.exports = function guessEditor (specifiedEditor) {
     }
   } catch (error) {
     // Ignore...
+  }
+
+  // Check if user chose the CUSTOM_EDITOR escape hatch
+  if (process.env.CUSTOM_EDITOR) {
+    return ['CUSTOM_EDITOR']
   }
 
   // Last resort, use old skool env vars

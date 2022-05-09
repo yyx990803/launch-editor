@@ -78,3 +78,9 @@ To launch files, send requests to the server like the following:
 | `vim` | [Vim](http://www.vim.org/) |✓| | |
 | `visualstudio` | [Visual Studio](https://www.visualstudio.com/vs/) | | |✓|
 | `webstorm` | [WebStorm](https://www.jetbrains.com/webstorm/) |✓|✓|✓|
+
+### Customization escape hatch
+
+If your favorite combination of editor and os is not supported or you would like more advanced configuration options, a special environment variable allows for customization:
+
+Simply set `CUSTOM_EDITOR` to the name of a script that is in your path, and the script will be called with `fileName`, `lineNumber` and `columnNumber` passed in as arguments.
