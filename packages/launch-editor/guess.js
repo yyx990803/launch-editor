@@ -18,7 +18,11 @@ module.exports = function guessEditor (specifiedEditor) {
   // `Get-Process` on Windows
   try {
     if (process.platform === 'darwin') {
-      const output = childProcess.execSync('ps x').toString()
+      const output = childProcess
+        .execSync('ps x', {
+          stdio: ['pipe', 'pipe', 'ignore']
+        })
+        .toString()
       const processNames = Object.keys(COMMON_EDITORS_OSX)
       for (let i = 0; i < processNames.length; i++) {
         const processName = processNames[i]
@@ -51,7 +55,9 @@ module.exports = function guessEditor (specifiedEditor) {
       // x List all processes owned by you
       // -o comm Need only names column
       const output = childProcess
-        .execSync('ps x --no-heading -o comm --sort=comm')
+        .execSync('ps x --no-heading -o comm --sort=comm', {
+          stdio: ['pipe', 'pipe', 'ignore']
+        })
         .toString()
       const processNames = Object.keys(COMMON_EDITORS_LINUX)
       for (let i = 0; i < processNames.length; i++) {
