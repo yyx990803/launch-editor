@@ -15,9 +15,9 @@ module.exports = function guessEditor (specifiedEditor) {
   }
 
   if (process.versions.webcontainer) {
-    return [process.env.EDITOR || "code"]
+    return [process.env.EDITOR || 'code']
   }
-  
+
   // We can find out which editor is currently running by:
   // `ps x` on macOS and Linux
   // `Get-Process` on Windows
