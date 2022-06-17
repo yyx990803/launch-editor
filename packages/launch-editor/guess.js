@@ -38,7 +38,7 @@ module.exports = function guessEditor (specifiedEditor) {
     } else if (process.platform === 'win32') {
       const output = childProcess
         .execSync(
-          'wmic process where "executablepath is not null" get executablepath',
+          'powershell -NoProfile -Command "Get-CimInstance -Query \\"select executablepath from win32_process where executablepath is not null\\" | % { $_.ExecutablePath }"',
           {
             stdio: ['pipe', 'pipe', 'ignore']
           }
