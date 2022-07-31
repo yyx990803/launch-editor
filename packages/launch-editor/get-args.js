@@ -49,7 +49,7 @@ module.exports = function getArgumentsForPosition (
     case 'rubymine64':
     case 'webstorm':
     case 'webstorm64':
-      return ['--line', lineNumber, fileName]
+      return ['--line', lineNumber, '--column', columnNumber, fileName]
   }
 
   // For all others, drop the lineNumber until we have
