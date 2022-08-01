@@ -37,17 +37,15 @@ module.exports = function guessEditor (specifiedEditor) {
       }
     } else if (process.platform === 'win32') {
       const output = childProcess
-        .execSync('powershell -Command "Get-Process | Select-Object Path"', {
-          stdio: ['pipe', 'pipe', 'ignore']
-        })
+        .execSync(
+          'powershell -NoProfile -Command "Get-CimInstance -Query \\"select executablepath from win32_process where executablepath is not null\\" | % { $_.ExecutablePath }"',
+          {
+            stdio: ['pipe', 'pipe', 'ignore']
+          }
+        )
         .toString()
       const runningProcesses = output.split('\r\n')
       for (let i = 0; i < runningProcesses.length; i++) {
-        // `Get-Process` sometimes returns empty lines
-        if (!runningProcesses[i]) {
-          continue
-        }
-
         const fullProcessPath = runningProcesses[i].trim()
         const shortProcessName = path.basename(fullProcessPath)
 
