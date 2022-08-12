@@ -66,9 +66,9 @@ module.exports = function guessEditor (specifiedEditor) {
     // Ignore...
   }
 
-  // Check if user chose the CUSTOM_EDITOR escape hatch
-  if (process.env.CUSTOM_EDITOR) {
-    return ['CUSTOM_EDITOR']
+  // Check if user chose the LAUNCH_EDITOR escape hatch
+  if (process.env.LAUNCH_EDITOR) {
+    return ['LAUNCH_EDITOR']
   }
 
   // Last resort, use old skool env vars

@@ -107,8 +107,8 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     args.push(fileName)
   }
 
-  if (editor === 'CUSTOM_EDITOR') {
-    editor = process.env.CUSTOM_EDITOR
+  if (editor === 'LAUNCH_EDITOR') {
+    editor = process.env.LAUNCH_EDITOR
   }
 
   if (_childProcess && isTerminalEditor(editor)) {
