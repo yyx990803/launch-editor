@@ -14,6 +14,10 @@ module.exports = function guessEditor (specifiedEditor) {
     return shellQuote.parse(specifiedEditor)
   }
 
+  if (process.env.LAUNCH_EDITOR) {
+    return [process.env.LAUNCH_EDITOR]
+  }
+
   if (process.versions.webcontainer) {
     return [process.env.EDITOR || 'code']
   }

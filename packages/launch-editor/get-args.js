@@ -53,6 +53,10 @@ module.exports = function getArgumentsForPosition (
       return ['--line', lineNumber, '--column', columnNumber, fileName]
   }
 
+  if (process.env.LAUNCH_EDITOR) {
+    return [fileName, lineNumber, columnNumber]
+  }
+
   // For all others, drop the lineNumber until we have
   // a mapping above, since providing the lineNumber incorrectly
   // can result in errors or confusing behavior.
