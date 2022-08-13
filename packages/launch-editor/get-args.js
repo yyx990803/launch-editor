@@ -35,6 +35,7 @@ module.exports = function getArgumentsForPosition (
     case 'code':
     case 'code-insiders':
     case 'Code':
+    case 'codium':
       return ['-r', '-g', `${fileName}:${lineNumber}:${columnNumber}`]
     case 'appcode':
     case 'clion':
@@ -49,7 +50,7 @@ module.exports = function getArgumentsForPosition (
     case 'rubymine64':
     case 'webstorm':
     case 'webstorm64':
-      return ['--line', lineNumber, fileName]
+      return ['--line', lineNumber, '--column', columnNumber, fileName]
     // Just pass args if the user chose the LAUNCH_EDITOR escape hatch
     case 'LAUNCH_EDITOR':
       return [fileName, lineNumber, columnNumber]

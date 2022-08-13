@@ -14,12 +14,17 @@
     "yorkie": "^1.0.1"
   },
   "eslintConfig": {
-    "extends": ["plugin:vue-libs/recommended"]
+    "extends": [
+      "plugin:vue-libs/recommended"
+    ]
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
