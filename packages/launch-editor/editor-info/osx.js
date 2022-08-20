@@ -14,7 +14,7 @@ module.exports = {
   '/Applications/Visual Studio Code.app/Contents/MacOS/Electron': 'code',
   '/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Electron':
     'code-insiders',
-  '/Applications/VSCodium.app/Contents/MacOS/Electron': 'vscodium',
+  '/Applications/VSCodium.app/Contents/MacOS/Electron': 'codium',
   '/Applications/AppCode.app/Contents/MacOS/appcode':
     '/Applications/AppCode.app/Contents/MacOS/appcode',
   '/Applications/CLion.app/Contents/MacOS/clion':
