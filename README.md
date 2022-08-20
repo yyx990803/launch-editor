@@ -79,3 +79,31 @@ To launch files, send requests to the server like the following:
 | `vim` | [Vim](http://www.vim.org/) |✓| | |
 | `visualstudio` | [Visual Studio](https://www.visualstudio.com/vs/) | | |✓|
 | `webstorm` | [WebStorm](https://www.jetbrains.com/webstorm/) |✓|✓|✓|
+
+### Custom editor support
+
+You can use the `LAUNCH_EDITOR` environment variable 
+
+#### to force a specific supported editor 
+
+```bash
+LAUNCH_EDITOR=codium
+```
+
+#### to run a custom launch script
+
+```bash
+LAUNCH_EDITOR=my-editor-launcher.sh
+```
+
+```shell
+# gets called with 3 args: filename, line, column
+filename=$1
+line=$2
+column=$3
+
+# call your editor with whatever args it expects
+my-editor -l $line -c $column -f $filename
+```
+
+
