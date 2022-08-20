@@ -19,11 +19,12 @@ module.exports = function getArgumentsForPosition (
     case 'charm':
       return [`${fileName}:${lineNumber}:${columnNumber}`]
     case 'notepad++':
-      return ['-n' + lineNumber, fileName]
+      return ['-n' + lineNumber, '-c' + columnNumber, fileName]
     case 'vim':
     case 'mvim':
       return [`+call cursor(${lineNumber}, ${columnNumber})`, fileName]
     case 'joe':
+    case 'gvim':
       return ['+' + `${lineNumber}`, fileName]
     case 'emacs':
     case 'emacsclient':
@@ -33,9 +34,12 @@ module.exports = function getArgumentsForPosition (
     case 'mine':
       return ['--line', lineNumber, fileName]
     case 'code':
-    case 'code-insiders':
     case 'Code':
+    case 'code-insiders':
+    case 'Code - Insiders':
     case 'codium':
+    case 'vscodium':
+    case 'VSCodium':
       return ['-r', '-g', `${fileName}:${lineNumber}:${columnNumber}`]
     case 'appcode':
     case 'clion':
@@ -50,6 +54,10 @@ module.exports = function getArgumentsForPosition (
     case 'rubymine64':
     case 'webstorm':
     case 'webstorm64':
+    case 'goland':
+    case 'goland64':
+    case 'rider':
+    case 'rider64':
       return ['--line', lineNumber, '--column', columnNumber, fileName]
   }
 
