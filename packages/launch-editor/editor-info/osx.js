@@ -14,6 +14,7 @@ module.exports = {
   '/Applications/Visual Studio Code.app/Contents/MacOS/Electron': 'code',
   '/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Electron':
     'code-insiders',
+  '/Applications/VSCodium.app/Contents/MacOS/Electron': 'codium',
   '/Applications/AppCode.app/Contents/MacOS/appcode':
     '/Applications/AppCode.app/Contents/MacOS/appcode',
   '/Applications/CLion.app/Contents/MacOS/clion':
@@ -29,5 +30,10 @@ module.exports = {
   '/Applications/RubyMine.app/Contents/MacOS/rubymine':
     '/Applications/RubyMine.app/Contents/MacOS/rubymine',
   '/Applications/WebStorm.app/Contents/MacOS/webstorm':
-    '/Applications/WebStorm.app/Contents/MacOS/webstorm'
+    '/Applications/WebStorm.app/Contents/MacOS/webstorm',
+  '/Applications/MacVim.app/Contents/MacOS/MacVim': 'mvim',
+  '/Applications/GoLand.app/Contents/MacOS/goland':
+    '/Applications/GoLand.app/Contents/MacOS/goland',
+  '/Applications/Rider.app/Contents/MacOS/rider':
+    '/Applications/Rider.app/Contents/MacOS/rider'
 }

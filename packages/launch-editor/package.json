@@ -1,6 +1,6 @@
 {
   "name": "launch-editor",
-  "version": "2.3.0",
+  "version": "2.6.0",
   "description": "launch editor from node.js",
   "main": "index.js",
   "repository": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/yyx990803/launch-editor#readme",
   "dependencies": {
     "picocolors": "^1.0.0",
-    "shell-quote": "^1.6.1"
+    "shell-quote": "^1.7.3"
   }
 }

@@ -1,6 +1,8 @@
 module.exports = [
   'Brackets.exe',
   'Code.exe',
+  'Code - Insiders.exe',
+  'VSCodium.exe',
   'atom.exe',
   'sublime_text.exe',
   'notepad++.exe',
@@ -15,5 +17,9 @@ module.exports = [
   'rubymine.exe',
   'rubymine64.exe',
   'webstorm.exe',
-  'webstorm64.exe'
+  'webstorm64.exe',
+  'goland.exe',
+  'goland64.exe',
+  'rider.exe',
+  'rider64.exe'
 ]
