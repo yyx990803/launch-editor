@@ -98,10 +98,10 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   }
 
   if (lineNumber) {
-    const extraArgs = getArgumentsForPosition(editor, fileName, lineNumber, columnNumber)
+    const extraArgs = getArgumentsForPosition(editor, `"${fileName}"`, lineNumber, columnNumber)
     args.push.apply(args, extraArgs)
   } else {
-    args.push(fileName)
+    args.push(`"${fileName}"`)
   }
 
   if (_childProcess && isTerminalEditor(editor)) {
@@ -116,8 +116,8 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     // launch .exe files.
     _childProcess = childProcess.spawn(
       'cmd.exe',
-      ['/C', editor].concat(args),
-      { stdio: 'inherit' }
+      ['/C start ""', `"${editor}"`].concat(args),
+      { shell: true, stdio: 'inherit' }
     )
   } else {
     _childProcess = childProcess.spawn(editor, args, { stdio: 'inherit' })
