@@ -121,7 +121,7 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     // launch .exe files.
     _childProcess = childProcess.spawn(
       'cmd.exe',
-      ['/C', editor].concat(args),
+      ['/C start ""', `"${editor}"`].concat(args),
       { stdio: 'inherit' }
     )
   } else if (editor === 'code' || editor.includes('Visual Studio Code.app')) {
