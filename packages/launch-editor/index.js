@@ -98,7 +98,12 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   }
 
   if (lineNumber) {
-    const extraArgs = getArgumentsForPosition(editor, fileName, lineNumber, columnNumber)
+    const extraArgs = getArgumentsForPosition(
+      editor.includes('Visual Studio Code.app') ? 'code' : editor,
+      fileName,
+      lineNumber,
+      columnNumber
+    )
     args.push.apply(args, extraArgs)
   } else {
     args.push(fileName)
@@ -119,20 +124,30 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
       ['/C', editor].concat(args),
       { stdio: 'inherit' }
     )
+  } else if (editor === 'code' || editor.includes('Visual Studio Code.app')) {
+    // Error 'error error: spawn code enoent' will be thrown in the vscode environment, so 'exec' is used
+    childProcess.exec(`"${editor}" ${args.join(' ')}`, (error) => {
+      if (error) {
+        onErrorCallback(fileName, error.message)
+      }
+    })
   } else {
     _childProcess = childProcess.spawn(editor, args, { stdio: 'inherit' })
   }
-  _childProcess.on('exit', function (errorCode) {
-    _childProcess = null
+  if (_childProcess) {
+    _childProcess.on('exit', function (errorCode) {
+      _childProcess = null
 
-    if (errorCode) {
-      onErrorCallback(fileName, '(code ' + errorCode + ')')
-    }
-  })
+      if (errorCode) {
+        onErrorCallback(fileName, '(code ' + errorCode + ')')
+      }
+    })
 
-  _childProcess.on('error', function (error) {
-    onErrorCallback(fileName, error.message)
-  })
+    _childProcess.on('error', function (error) {
+      console.log('error', error)
+      onErrorCallback(fileName, error.message)
+    })
+  }
 }
 
 module.exports = launchEditor
