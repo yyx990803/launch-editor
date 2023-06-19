@@ -1,10 +1,10 @@
 module.exports = {
   atom: 'atom',
   Brackets: 'brackets',
-  code: 'code',
   'code-insiders': 'code-insiders',
-  codium: 'codium',
+  code: 'code',
   vscodium: 'vscodium',
+  codium: 'codium',
   emacs: 'emacs',
   gvim: 'gvim',
   'idea.sh': 'idea',
