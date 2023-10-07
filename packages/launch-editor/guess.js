@@ -1,7 +1,7 @@
 const path = require('path')
 const shellQuote = require('shell-quote')
 const childProcess = require('child_process')
-
+const iconv = require('iconv-lite')
 // Map from full process name to binary that starts the process
 // We can't just re-use full process name, because it will spawn a new instance
 // of the app every time
@@ -56,14 +56,19 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     } else if (process.platform === 'win32') {
-      const output = childProcess
-        .execSync(
-          'powershell -NoProfile -Command "Get-CimInstance -Query \\"select executablepath from win32_process where executablepath is not null\\" | % { $_.ExecutablePath }"',
-          {
-            stdio: ['pipe', 'pipe', 'ignore']
-          }
-        )
-        .toString()
+      let output = childProcess
+      .execSync(
+        'powershell -NoProfile -Command "Get-CimInstance -Query \\"select executablepath from win32_process where executablepath is not null\\" | % { $_.ExecutablePath }"',
+        {
+          stdio: ['pipe', 'pipe', 'ignore']
+        }
+      )
+      // If the system locale is gbk encoding
+      if(childProcess.execSync(`chcp`, {encoding: `utf8`}).match(/936/)){
+        output = iconv.decode(output,'gbk')
+      }else{
+        output = output.toString();
+      }
       const runningProcesses = output.split('\r\n')
       for (let i = 0; i < runningProcesses.length; i++) {
         const fullProcessPath = runningProcesses[i].trim()
