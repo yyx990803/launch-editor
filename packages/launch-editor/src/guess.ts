@@ -1,5 +1,5 @@
 import path from 'path';
-import shellQuote from 'shell-quote';
+import shellQuote, { ParseEntry } from 'shell-quote';
 import childProcess from 'child_process';
 
 // Map from full process name to binary that starts the process
@@ -8,9 +8,10 @@ import childProcess from 'child_process';
 import COMMON_EDITORS_OSX from './editor-info/osx';
 import COMMON_EDITORS_LINUX from './editor-info/linux';
 import COMMON_EDITORS_WIN from './editor-info/windows';
-import { Editor } from './editor-info/Editor';
 
-const guessEditor = (specifiedEditor: Editor) => {
+const guessEditor = (
+  specifiedEditor?: undefined | Parameters<typeof shellQuote.parse>[0], // we don't care what the actual underlying type is; it's whatever shellQuote uses.
+) => {
   if (specifiedEditor) return shellQuote.parse(specifiedEditor);
   if (process.env.LAUNCH_EDITOR) return [process.env.LAUNCH_EDITOR];
   if (process.versions.webcontainer) return [process.env.EDITOR || 'code'];
@@ -105,6 +106,6 @@ const guessEditor = (specifiedEditor: Editor) => {
     return [process.env.EDITOR];
   }
 
-  return [null];
+  return []; // was formerly [null]; omitting any value entirely makes more sense
 };
 export default guessEditor;

@@ -87,7 +87,7 @@ const launchEditor = (
 
   onErrorCallback = wrapErrorCallback(onErrorCallback!);
 
-  const [editor, ...args] = guessEditor(specifiedEditor);
+  const [editor, ...args] = guessEditor(specifiedEditor) as string[];
   if (!editor) {
     onErrorCallback(fileName, null);
     return;
@@ -109,7 +109,7 @@ const launchEditor = (
 
   if (lineNumber) {
     const extraArgs = getArgumentsForPosition(
-      editor,
+      editor.toString(),
       fileName,
       lineNumber,
       columnNumber,
@@ -126,24 +126,26 @@ const launchEditor = (
     _childProcess.kill('SIGKILL');
   }
 
-  if (process.platform === 'win32') {
-    // On Windows, launch the editor in a shell because spawn can only
-    // launch .exe files.
-    _childProcess = childProcess.spawn('cmd.exe', ['/C', editor].concat(args), {
-      stdio: 'inherit',
-    });
-  } else {
-    _childProcess = childProcess.spawn(editor, args, { stdio: 'inherit' });
-  }
-  _childProcess.on('exit', function (errorCode) {
+  _childProcess =
+    process.platform === 'win32'
+      ? childProcess.spawn(
+          'cmd.exe',
+          ['/C', `${editor}`].concat(args.map(v => `${v}`)),
+          {
+            stdio: 'inherit',
+          },
+        )
+      : childProcess.spawn(editor, args, { stdio: 'inherit' });
+
+  _childProcess.on('exit', errorCode => {
     _childProcess = null;
 
     if (errorCode) {
-      onErrorCallback?.(fileName, '(code ' + errorCode + ')');
+      onErrorCallback?.(fileName, `(code ${errorCode})`);
     }
   });
 
-  _childProcess.on('error', function (error) {
+  _childProcess.on('error', error => {
     onErrorCallback?.(fileName, error.message);
   });
 };

@@ -4,10 +4,11 @@ import path from 'path';
 const getArgumentsForPosition = (
   editor: string,
   fileName: string,
-  lineNumber: number,
-  columnNumber = 1,
-) => {
+  lineNumber: number | string,
+  columnNumber: number | string | null = 1,
+): string[] => {
   const editorBasename = path.basename(editor).replace(/\.(exe|cmd|bat)$/i, '');
+  columnNumber = columnNumber ?? 1; // the `= 1` only applies if its omitted, not explicitly set to null
   switch (editorBasename) {
     case 'atom':
     case 'Atom':
@@ -32,7 +33,7 @@ const getArgumentsForPosition = (
     case 'rmate':
     case 'mate':
     case 'mine':
-      return ['--line', lineNumber, fileName];
+      return ['--line', lineNumber.toString(), fileName];
     case 'code':
     case 'Code':
     case 'code-insiders':
@@ -58,10 +59,17 @@ const getArgumentsForPosition = (
     case 'goland64':
     case 'rider':
     case 'rider64':
-      return ['--line', lineNumber, '--column', columnNumber, fileName];
+      return [
+        '--line',
+        lineNumber.toString(),
+        '--column',
+        columnNumber.toString(),
+        fileName,
+      ];
   }
 
-  if (process.env.LAUNCH_EDITOR) return [fileName, lineNumber, columnNumber];
+  if (process.env.LAUNCH_EDITOR)
+    return [fileName, lineNumber.toString(), columnNumber.toString()];
 
   // For all others, drop the lineNumber until we have
   // a mapping above, since providing the lineNumber incorrectly
