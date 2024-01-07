@@ -1,5 +1,5 @@
 import path from 'path';
-import shellQuote, { ParseEntry } from 'shell-quote';
+import shellQuote from 'shell-quote';
 import childProcess from 'child_process';
 
 // Map from full process name to binary that starts the process
