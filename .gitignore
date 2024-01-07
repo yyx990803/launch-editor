@@ -1,3 +1,4 @@
 node_modules/
 *.log
 dist
+.vscode/settings.json
