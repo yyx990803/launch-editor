@@ -2,7 +2,16 @@
   "name": "launch-editor",
   "version": "2.6.1",
   "description": "launch editor from node.js",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yyx990803/launch-editor.git"
