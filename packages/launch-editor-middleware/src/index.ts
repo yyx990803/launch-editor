@@ -1,11 +1,11 @@
 import url from 'url';
 import path from 'path';
-import launch from 'launch-editor';
+import launch, {type ErrorCallback} from 'launch-editor';
 
 export default (
   specifiedEditor: undefined,
-  srcRoot: string | undefined,
-  onErrorCallback: any,
+  srcRoot: string | ErrorCallback | undefined,
+  onErrorCallback?: ErrorCallback,
 ) => {
   if (typeof specifiedEditor === 'function') {
     onErrorCallback = specifiedEditor;
@@ -33,7 +33,7 @@ export default (
       );
     } else {
       launch(
-        path.resolve(srcRoot!, ...(Array.isArray(file) ? file : [file])), // file can be an array for some reason, idk why/when
+        path.resolve(srcRoot as string, ...(Array.isArray(file) ? file : [file])), // file can be an array for some reason, idk why/when
         specifiedEditor,
         onErrorCallback,
       );
