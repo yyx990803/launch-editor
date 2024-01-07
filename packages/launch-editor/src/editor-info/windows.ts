@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   'Brackets.exe',
   'Code.exe',
   'Code - Insiders.exe',
@@ -21,5 +21,5 @@ module.exports = [
   'goland.exe',
   'goland64.exe',
   'rider.exe',
-  'rider64.exe'
-]
+  'rider64.exe',
+];

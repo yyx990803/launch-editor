@@ -1,13 +1,13 @@
-const path = require('path')
+import path from 'path';
 
-// normalize file/line numbers into command line args for specific editors
-module.exports = function getArgumentsForPosition (
-  editor,
-  fileName,
-  lineNumber,
-  columnNumber = 1
-) {
-  const editorBasename = path.basename(editor).replace(/\.(exe|cmd|bat)$/i, '')
+/*& normalize file/line numbers into command line args for specific editors */
+const getArgumentsForPosition = (
+  editor: string,
+  fileName: string,
+  lineNumber: number,
+  columnNumber = 1,
+) => {
+  const editorBasename = path.basename(editor).replace(/\.(exe|cmd|bat)$/i, '');
   switch (editorBasename) {
     case 'atom':
     case 'Atom':
@@ -17,22 +17,22 @@ module.exports = function getArgumentsForPosition (
     case 'sublime_text':
     case 'wstorm':
     case 'charm':
-      return [`${fileName}:${lineNumber}:${columnNumber}`]
+      return [`${fileName}:${lineNumber}:${columnNumber}`];
     case 'notepad++':
-      return ['-n' + lineNumber, '-c' + columnNumber, fileName]
+      return ['-n' + lineNumber, '-c' + columnNumber, fileName];
     case 'vim':
     case 'mvim':
-      return [`+call cursor(${lineNumber}, ${columnNumber})`, fileName]
+      return [`+call cursor(${lineNumber}, ${columnNumber})`, fileName];
     case 'joe':
     case 'gvim':
-      return ['+' + `${lineNumber}`, fileName]
+      return ['+' + `${lineNumber}`, fileName];
     case 'emacs':
     case 'emacsclient':
-      return [`+${lineNumber}:${columnNumber}`, fileName]
+      return [`+${lineNumber}:${columnNumber}`, fileName];
     case 'rmate':
     case 'mate':
     case 'mine':
-      return ['--line', lineNumber, fileName]
+      return ['--line', lineNumber, fileName];
     case 'code':
     case 'Code':
     case 'code-insiders':
@@ -40,7 +40,7 @@ module.exports = function getArgumentsForPosition (
     case 'codium':
     case 'vscodium':
     case 'VSCodium':
-      return ['-r', '-g', `${fileName}:${lineNumber}:${columnNumber}`]
+      return ['-r', '-g', `${fileName}:${lineNumber}:${columnNumber}`];
     case 'appcode':
     case 'clion':
     case 'clion64':
@@ -58,15 +58,14 @@ module.exports = function getArgumentsForPosition (
     case 'goland64':
     case 'rider':
     case 'rider64':
-      return ['--line', lineNumber, '--column', columnNumber, fileName]
+      return ['--line', lineNumber, '--column', columnNumber, fileName];
   }
 
-  if (process.env.LAUNCH_EDITOR) {
-    return [fileName, lineNumber, columnNumber]
-  }
+  if (process.env.LAUNCH_EDITOR) return [fileName, lineNumber, columnNumber];
 
   // For all others, drop the lineNumber until we have
   // a mapping above, since providing the lineNumber incorrectly
   // can result in errors or confusing behavior.
-  return [fileName]
-}
+  return [fileName];
+};
+export default getArgumentsForPosition;

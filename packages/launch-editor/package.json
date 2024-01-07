@@ -7,6 +7,13 @@
     "type": "git",
     "url": "git+https://github.com/yyx990803/launch-editor.git"
   },
+  "scripts": {
+    "build-base": "esbuild src/index.ts --bundle --minify --sourcemap --platform=node --packages=external",
+    "build:cjs": "yarn build-base --format=cjs --outfile=dist/index.cjs",
+    "build:esm": "yarn build-base --format=esm --outfile=dist/index.mjs",
+    "build:dts": "tsc --declaration --emitDeclarationOnly --rootDir src --outDir dist",
+    "build": "concurrently \"npm:build:*\""
+  },
   "keywords": [
     "launch",
     "editor"
@@ -20,5 +27,11 @@
   "dependencies": {
     "picocolors": "^1.0.0",
     "shell-quote": "^1.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/shell-quote": "^1.7.5",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.19.11"
   }
 }
