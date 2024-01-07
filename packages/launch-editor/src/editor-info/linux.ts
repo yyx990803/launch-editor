@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   atom: 'atom',
   Brackets: 'brackets',
   'code-insiders': 'code-insiders',
@@ -15,5 +15,5 @@ module.exports = {
   vim: 'vim',
   'webstorm.sh': 'webstorm',
   'goland.sh': 'goland',
-  'rider.sh': 'rider'
-}
+  'rider.sh': 'rider',
+} as Record<string, string>;

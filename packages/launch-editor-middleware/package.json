@@ -2,10 +2,26 @@
   "name": "launch-editor-middleware",
   "version": "2.6.1",
   "description": "express middleware for launching editor",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yyx990803/launch-editor.git"
+  },
+  "scripts": {
+    "build-base": "esbuild src/index.ts --bundle --minify --sourcemap --platform=node --packages=external",
+    "build:cjs": "yarn build-base --format=cjs --outfile=dist/index.cjs",
+    "build:esm": "yarn build-base --format=esm --outfile=dist/index.mjs",
+    "build:dts": "tsc --declaration --emitDeclarationOnly --rootDir src --outDir dist",
+    "build": "concurrently \"npm:build:*\""
   },
   "keywords": [
     "express",

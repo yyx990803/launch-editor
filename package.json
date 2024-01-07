@@ -7,16 +7,24 @@
     "lint": "eslint packages --fix"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
-    "eslint-plugin-vue-libs": "^2.1.0",
-    "lerna": "^2.5.1",
-    "lint-staged": "^6.0.0",
-    "yorkie": "^1.0.1"
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "eslint": "^8.56.0",
+    "lerna": "^8.0.2",
+    "lint-staged": "^15.2.0",
+    "typescript": "^5.3.3",
+    "yorkie": "^2.0.0"
   },
   "eslintConfig": {
     "extends": [
-      "plugin:vue-libs/recommended"
-    ]
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "root": true
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

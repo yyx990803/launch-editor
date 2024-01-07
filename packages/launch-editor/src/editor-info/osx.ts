@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   '/Applications/Atom.app/Contents/MacOS/Atom': 'atom',
   '/Applications/Atom Beta.app/Contents/MacOS/Atom Beta':
     '/Applications/Atom Beta.app/Contents/MacOS/Atom Beta',
@@ -35,5 +35,5 @@ module.exports = {
   '/Applications/GoLand.app/Contents/MacOS/goland':
     '/Applications/GoLand.app/Contents/MacOS/goland',
   '/Applications/Rider.app/Contents/MacOS/rider':
-    '/Applications/Rider.app/Contents/MacOS/rider'
-}
+    '/Applications/Rider.app/Contents/MacOS/rider',
+} as Record<string, string>;
