@@ -18,11 +18,11 @@ import guessEditor from './guess';
 import getArgumentsForPosition from './get-args';
 import { Editor } from './editor-info/Editor';
 
-type ErrorCallbackType = (
+export type ErrorCallback = (
   fileName: string,
   errorMessage?: string | undefined | null,
 ) => void;
-const wrapErrorCallback = (cb: ErrorCallbackType) =>
+const wrapErrorCallback = (cb: ErrorCallback) =>
   ((fileName, errorMessage) => {
     console.log();
     console.log(
@@ -40,7 +40,7 @@ const wrapErrorCallback = (cb: ErrorCallbackType) =>
     }
     console.log();
     if (cb) cb(fileName, errorMessage);
-  }) satisfies ErrorCallbackType;
+  }) satisfies ErrorCallback;
 
 const isTerminalEditor = (editor: Editor) => {
   switch (editor) {
@@ -69,8 +69,8 @@ let _childProcess: ChildProcess | null = null;
 
 const launchEditor = (
   file: string,
-  specifiedEditor: Editor | undefined | ErrorCallbackType,
-  onErrorCallback?: ErrorCallbackType,
+  specifiedEditor: Editor | undefined | ErrorCallback,
+  onErrorCallback?: ErrorCallback,
 ) => {
   const parsed = parseFile(file);
   let { fileName } = parsed;
@@ -114,7 +114,7 @@ const launchEditor = (
       lineNumber,
       columnNumber,
     );
-    args.push.apply(args, extraArgs);
+    args.push(...extraArgs);
   } else {
     args.push(fileName);
   }
