@@ -21,6 +21,10 @@ module.exports = {
     '/Applications/CLion.app/Contents/MacOS/clion',
   '/Applications/IntelliJ IDEA.app/Contents/MacOS/idea':
     '/Applications/IntelliJ IDEA.app/Contents/MacOS/idea',
+  '/Applications/IntelliJ IDEA Ultimate.app/Contents/MacOS/idea':
+    '/Applications/IntelliJ IDEA Ultimate.app/Contents/MacOS/idea',
+  '/Applications/IntelliJ IDEA Community Edition.app/Contents/MacOS/idea':
+    '/Applications/IntelliJ IDEA Community Edition.app/Contents/MacOS/idea',
   '/Applications/PhpStorm.app/Contents/MacOS/phpstorm':
     '/Applications/PhpStorm.app/Contents/MacOS/phpstorm',
   '/Applications/PyCharm.app/Contents/MacOS/pycharm':
