@@ -68,6 +68,7 @@ To launch files, send requests to the server like the following:
 | `clion` | [Clion](https://www.jetbrains.com/clion/) |  |✓|✓|
 | `code` | [Visual Studio Code](https://code.visualstudio.com/) |✓|✓|✓|
 | `code-insiders` | [Visual Studio Code Insiders](https://code.visualstudio.com/insiders/) |✓|✓|✓|
+| `codelobster` | [CodeLobster](https://codelobster.com/) |✓|✓|✓|
 | `codium` | [VSCodium](https://github.com/VSCodium/vscodium) |✓|✓|✓|
 | `emacs` | [Emacs](https://www.gnu.org/software/emacs/) |✓| | |
 | `idea` | [IDEA](https://www.jetbrains.com/idea/) |✓|✓|✓|
