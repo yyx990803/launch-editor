@@ -131,7 +131,11 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   })
 
   _childProcess.on('error', function (error) {
-    onErrorCallback(fileName, error.message)
+    let { code, message } = error
+    if ('ENOENT' === code) {
+      message = `${message} ('${editor}' command does not exist in 'PATH')`
+    }
+    onErrorCallback(fileName, message);
   })
 }
 
