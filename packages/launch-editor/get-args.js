@@ -17,6 +17,8 @@ module.exports = function getArgumentsForPosition (
     case 'sublime_text':
     case 'wstorm':
     case 'charm':
+    case 'zed':
+    case 'Zed':
       return [`${fileName}:${lineNumber}:${columnNumber}`]
     case 'notepad++':
       return ['-n' + lineNumber, '-c' + columnNumber, fileName]
