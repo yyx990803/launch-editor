@@ -37,7 +37,7 @@ module.exports = function guessEditor (specifiedEditor) {
       for (let i = 0; i < processNames.length; i++) {
         const processName = processNames[i]
         // Find editor by exact match.
-        if (output.indexOf(processName) !== -1) {
+        if (processList.includes(processName)) {
           return [COMMON_EDITORS_OSX[processName]]
         }
         const processNameWithoutApplications = processName.replace('/Applications', '')
