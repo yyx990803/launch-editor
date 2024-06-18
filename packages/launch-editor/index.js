@@ -97,6 +97,36 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     fileName = path.relative('', fileName)
   }
 
+  // cmd.exe on Windows is vulnerable to RCE attacks given a file name of the
+  // form "C:\Users\myusername\Downloads\& curl 172.21.93.52". Use a safe file
+  // name pattern to validate user-provided file names. This doesn't cover the
+  // entire range of valid file names but should cover almost all of them in practice.
+  // (Backport of
+  // https://github.com/facebook/create-react-app/pull/4866
+  // and
+  // https://github.com/facebook/create-react-app/pull/5431)
+
+  // Allows alphanumeric characters, periods, dashes, slashes, and underscores.
+  const WINDOWS_CMD_SAFE_FILE_NAME_PATTERN = /^([A-Za-z]:[/\\])?[\p{L}0-9/.\-_\\]+$/u
+  if (
+    process.platform === 'win32' &&
+    !WINDOWS_CMD_SAFE_FILE_NAME_PATTERN.test(fileName.trim())
+  ) {
+    console.log()
+    console.log(
+      colors.red('Could not open ' + path.basename(fileName) + ' in the editor.')
+    )
+    console.log()
+    console.log(
+      'When running on Windows, file names are checked against a safe file name ' +
+        'pattern to protect against remote code execution attacks. File names ' +
+        'may consist only of alphanumeric characters (all languages), periods, ' +
+        'dashes, slashes, and underscores.'
+    );
+    console.log()
+    return
+  }
+
   if (lineNumber) {
     const extraArgs = getArgumentsForPosition(editor, fileName, lineNumber, columnNumber)
     args.push.apply(args, extraArgs)
