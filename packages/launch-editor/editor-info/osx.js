@@ -41,5 +41,5 @@ module.exports = {
     '/Applications/GoLand.app/Contents/MacOS/goland',
   '/Applications/Rider.app/Contents/MacOS/rider':
     '/Applications/Rider.app/Contents/MacOS/rider',
-  '/Applications/Zed.app/Contents/MacOS/zed': '/Applications/Zed.app/Contents/MacOS/cli'
+  '/Applications/Zed.app/Contents/MacOS/zed': 'zed'
 }
