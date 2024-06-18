@@ -5,7 +5,7 @@ const childProcess = require('child_process')
 // Map from full process name to binary that starts the process
 // We can't just re-use full process name, because it will spawn a new instance
 // of the app every time
-const COMMON_EDITORS_OSX = require('./editor-info/osx')
+const COMMON_EDITORS_MACOS = require('./editor-info/macos')
 const COMMON_EDITORS_LINUX = require('./editor-info/linux')
 const COMMON_EDITORS_WIN = require('./editor-info/windows')
 
@@ -32,20 +32,20 @@ module.exports = function guessEditor (specifiedEditor) {
           stdio: ['pipe', 'pipe', 'ignore']
         })
         .toString()
-      const processNames = Object.keys(COMMON_EDITORS_OSX)
+      const processNames = Object.keys(COMMON_EDITORS_MACOS)
       const processList = output.split('\n')
       for (let i = 0; i < processNames.length; i++) {
         const processName = processNames[i]
         // Find editor by exact match.
         if (processList.includes(processName)) {
-          return [COMMON_EDITORS_OSX[processName]]
+          return [COMMON_EDITORS_MACOS[processName]]
         }
         const processNameWithoutApplications = processName.replace('/Applications', '')
         // Find editor installation not in /Applications.
         if (output.indexOf(processNameWithoutApplications) !== -1) {
           // Use the CLI command if one is specified
-          if (processName !== COMMON_EDITORS_OSX[processName]) {
-            return [COMMON_EDITORS_OSX[processName]]
+          if (processName !== COMMON_EDITORS_MACOS[processName]) {
+            return [COMMON_EDITORS_MACOS[processName]]
           }
           // Use a partial match to find the running process path.  If one is found, use the
           // existing path since it can be running from anywhere.
