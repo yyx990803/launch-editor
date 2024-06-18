@@ -15,7 +15,7 @@ module.exports = (specifiedEditor, srcRoot, onErrorCallback) => {
 
   srcRoot = srcRoot || process.cwd()
 
-  return function launchEditorMiddleware (req, res, next) {
+  return function launchEditorMiddleware (req, res) {
     const { file } = url.parse(req.url, true).query || {}
     if (!file) {
       res.statusCode = 500

@@ -7,16 +7,12 @@
     "lint": "eslint packages --fix"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
-    "eslint-plugin-vue-libs": "^2.1.0",
+    "@eslint/js": "^9.5.0",
+    "eslint": "^9.5.0",
+    "globals": "^15.6.0",
     "lerna": "^2.5.1",
     "lint-staged": "^6.0.0",
     "yorkie": "^1.0.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:vue-libs/recommended"
-    ]
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

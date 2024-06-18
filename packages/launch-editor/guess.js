@@ -90,7 +90,7 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     }
-  } catch (error) {
+  } catch (ignoreError) {
     // Ignore...
   }
 
