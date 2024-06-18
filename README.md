@@ -74,7 +74,7 @@ To launch files, send requests to the server like the following:
 | `notepad++`     | [Notepad++](https://notepad-plus-plus.org/download/v7.5.4.html)        |       |   ✓     |       |
 | `pycharm`       | [PyCharm](https://www.jetbrains.com/pycharm/)                          |  ✓    |   ✓     |   ✓   |
 | `phpstorm`      | [PhpStorm](https://www.jetbrains.com/phpstorm/)                        |  ✓    |   ✓     |   ✓   |
-| `rider`         | [Rider](https://www.jetbrains.com/rider/)                              |       |         |       |
+| `rider`         | [Rider](https://www.jetbrains.com/rider/)                              |  ✓    |   ✓     |   ✓   |
 | `rubymine`      | [RubyMine](https://www.jetbrains.com/ruby/)                            |  ✓    |   ✓     |   ✓   |
 | `sublime`       | [Sublime Text](https://www.sublimetext.com/)                           |  ✓    |   ✓     |   ✓   |
 | `vim`           | [Vim](http://www.vim.org/)                                             |  ✓    |         |       |
