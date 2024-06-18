@@ -18,7 +18,6 @@ module.exports = function getArgumentsForPosition (
     case 'wstorm':
     case 'charm':
     case 'zed':
-    case 'Zed':
       return [`${fileName}:${lineNumber}:${columnNumber}`]
     case 'notepad++':
       return ['-n' + lineNumber, '-c' + columnNumber, fileName]
