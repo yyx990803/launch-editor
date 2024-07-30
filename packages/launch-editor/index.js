@@ -106,7 +106,7 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   // and
   // https://github.com/facebook/create-react-app/pull/5431)
 
-  // Allows alphanumeric characters, periods, dashes, slashes, and underscores.
+  // Allows alphanumeric characters, periods, dashes, slashes, underscores, plus and space.
   const WINDOWS_CMD_SAFE_FILE_NAME_PATTERN = /^([A-Za-z]:[/\\])?[\p{L}0-9/.\-_\\\s]+$/u
   if (
     process.platform === 'win32' &&
