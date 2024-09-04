@@ -112,8 +112,8 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   }
 
   if (process.platform === 'win32') {
-    // On Windows, launch the editor in a shell because spawn can only
-    // launch .exe files.
+    // On Windows, we need to use `exec` with the `shell: true` option,
+    // and some more sanitization is required.
 
     // However, CMD.exe on Windows is vulnerable to RCE attacks given a file name of the
     // form "C:\Users\myusername\Downloads\& curl 172.21.93.52".
@@ -131,30 +131,36 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     // - Support `[` and `]` because they are widely used for [slug]
     // So here we choose to use `^` to escape special characters instead.
 
-    const doubleQuote = (str) => `"${str}"`
-    // Need to double quote the editor path in case it contains spaces;
+    // According to https://ss64.com/nt/syntax-esc.html,
+    // we can use `^` to escape `&`, `<`, `>`, `|`, `%`, and `^`
+    // I'm not sure if we have to escape all of these, but let's do it anyway
+    function escapeCmdArgs (cmdArgs) {
+      return cmdArgs.replace(/([&|<>,;=^])/g, '^$1')
+    }
 
+    // Need to double quote the editor path in case it contains spaces;
     // If the fileName contains spaces, we also need to double quote it in the arguments
     // However, there's a case that it's concatenated with line number and column number
     // which is separated by `:`. We need to double quote the whole string in this case.
+    // Also, if the string contains the escape character `^`, it needs to be quoted, too.
     function doubleQuoteIfNeeded(str) {
-      return str.includes(' ') ? doubleQuote(str) : str
+      if (str.includes(' ')) {
+        return `"${str}"`
+      } else if (str.includes('^')) {
+        // If a string includes an escaped character, not only does it need to be quoted,
+        // but the quotes need to be escaped too.
+        return `^"${str}^"`
+      }
+      return str
     }
-    const launchCommand = doubleQuote(
-      [doubleQuote(editor), ...args.map(doubleQuoteIfNeeded)].join(' ')
-    )
+    const launchCommand = [editor, ...args.map(escapeCmdArgs)]
+      .map(doubleQuoteIfNeeded)
+      .join(' ')
 
-    // According to https://ss64.com/nt/syntax-esc.html,
-    // we can use `^` to escape `&`, `<`, `>`, `|`, `%`, and `^
-    function escapeCmdArgs (cmdArgs) {
-      return cmdArgs.replace(/([&|<>,;= \t^])/g, '^$1')
-    }
-
-    _childProcess = childProcess.spawn(
-      'cmd.exe',
-      ['/C', escapeCmdArgs(launchCommand)],
-      { stdio: 'inherit' }
-    )
+    _childProcess = childProcess.exec(launchCommand, {
+      stdio: 'inherit',
+      shell: true
+    })
   } else {
     _childProcess = childProcess.spawn(editor, args, { stdio: 'inherit' })
   }
