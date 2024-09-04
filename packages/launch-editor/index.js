@@ -97,36 +97,6 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     fileName = path.relative('', fileName)
   }
 
-  // cmd.exe on Windows is vulnerable to RCE attacks given a file name of the
-  // form "C:\Users\myusername\Downloads\& curl 172.21.93.52". Use a safe file
-  // name pattern to validate user-provided file names. This doesn't cover the
-  // entire range of valid file names but should cover almost all of them in practice.
-  // (Backport of
-  // https://github.com/facebook/create-react-app/pull/4866
-  // and
-  // https://github.com/facebook/create-react-app/pull/5431)
-
-  // Allows alphanumeric characters, periods, dashes, slashes, underscores, plus and space.
-  const WINDOWS_CMD_SAFE_FILE_NAME_PATTERN = /^([A-Za-z]:[/\\])?[\p{L}0-9/.\-\\_+ \[\]]+$/u
-  if (
-    process.platform === 'win32' &&
-    !WINDOWS_CMD_SAFE_FILE_NAME_PATTERN.test(fileName.trim())
-  ) {
-    console.log()
-    console.log(
-      colors.red('Could not open ' + path.basename(fileName) + ' in the editor.')
-    )
-    console.log()
-    console.log(
-      'When running on Windows, file names are checked against a safe file name ' +
-        'pattern to protect against remote code execution attacks. File names ' +
-        'may consist only of alphanumeric characters (all languages), periods, ' +
-        'dashes, slashes, and underscores.'
-    );
-    console.log()
-    return
-  }
-
   if (lineNumber) {
     const extraArgs = getArgumentsForPosition(editor, fileName, lineNumber, columnNumber)
     args.push.apply(args, extraArgs)
@@ -144,9 +114,45 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
   if (process.platform === 'win32') {
     // On Windows, launch the editor in a shell because spawn can only
     // launch .exe files.
+
+    // However, CMD.exe on Windows is vulnerable to RCE attacks given a file name of the
+    // form "C:\Users\myusername\Downloads\& curl 172.21.93.52".
+    // `create-react-app` used a safe file name pattern to validate user-provided file names:
+    // - https://github.com/facebook/create-react-app/pull/4866
+    // - https://github.com/facebook/create-react-app/pull/5431
+    // But that's not a viable solution for this package because
+    // it's depended on by so many meta frameworks that heavily rely on
+    // special characters in file names for filesystem-based routing.
+    // We need to at least:
+    // - Support `+` because it's used in SvelteKit and Vike
+    // - Support `$` because it's used in Remix
+    // - Support `(` and `)` because they are used in Analog, SolidStart, and Vike
+    // - Support `@` because it's used in Vike
+    // - Support `[` and `]` because they are widely used for [slug]
+    // So here we choose to use `^` to escape special characters instead.
+
+    const doubleQuote = (str) => `"${str}"`
+    // Need to double quote the editor path in case it contains spaces;
+
+    // If the fileName contains spaces, we also need to double quote it in the arguments
+    // However, there's a case that it's concatenated with line number and column number
+    // which is separated by `:`. We need to double quote the whole string in this case.
+    function doubleQuoteIfNeeded(str) {
+      return str.includes(' ') ? doubleQuote(str) : str
+    }
+    const launchCommand = doubleQuote(
+      [doubleQuote(editor), ...args.map(doubleQuoteIfNeeded)].join(' ')
+    )
+
+    // According to https://ss64.com/nt/syntax-esc.html,
+    // we can use `^` to escape `&`, `<`, `>`, `|`, `%`, and `^
+    function escapeCmdArgs (cmdArgs) {
+      return cmdArgs.replace(/([&|<>,;= \t^])/g, '^$1')
+    }
+
     _childProcess = childProcess.spawn(
       'cmd.exe',
-      ['/C', editor].concat(args),
+      ['/C', escapeCmdArgs(launchCommand)],
       { stdio: 'inherit' }
     )
   } else {
