@@ -21,6 +21,6 @@ module.exports = {
   'webstorm.sh': 'webstorm',
   goland: 'goland',
   'goland.sh': 'goland',
-  rider: 'rider'
+  rider: 'rider',
   'rider.sh': 'rider'
 }
