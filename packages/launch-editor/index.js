@@ -144,13 +144,13 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     // which is separated by `:`. We need to double quote the whole string in this case.
     // Also, if the string contains the escape character `^`, it needs to be quoted, too.
     function doubleQuoteIfNeeded(str) {
-      if (str.includes(' ')) {
-        return `"${str}"`
-      } else if (str.includes('^')) {
+      if (str.includes('^')) {
         // If a string includes an escaped character, not only does it need to be quoted,
         // but the quotes need to be escaped too.
         return `^"${str}^"`
-      }
+      } else if (str.includes(' ')) {
+        return `"${str}"`
+      } 
       return str
     }
     const launchCommand = [editor, ...args.map(escapeCmdArgs)]
