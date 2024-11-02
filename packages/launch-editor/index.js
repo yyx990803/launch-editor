@@ -157,9 +157,6 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
       .map(doubleQuoteIfNeeded)
       .join(' ')
     
-    // 防止中文路径乱码
-    childProcess.execSync('chcp 65001');
-    
     _childProcess = childProcess.exec(launchCommand, {
       stdio: 'inherit',
       shell: true
