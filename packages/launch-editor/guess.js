@@ -56,7 +56,7 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     } else if (process.platform === 'win32') {
-      // 防止中文路径乱码
+      // compatible for path with Chinese characters
       childProcess.execSync('chcp 65001');
       const output = childProcess
         .execSync(
