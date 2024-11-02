@@ -156,7 +156,10 @@ function launchEditor (file, specifiedEditor, onErrorCallback) {
     const launchCommand = [editor, ...args.map(escapeCmdArgs)]
       .map(doubleQuoteIfNeeded)
       .join(' ')
-
+    
+    // 防止中文路径乱码
+    childProcess.execSync('chcp 65001');
+    
     _childProcess = childProcess.exec(launchCommand, {
       stdio: 'inherit',
       shell: true
