@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/yyx990803/launch-editor#readme",
   "dependencies": {
-    "launch-editor": "^2.9.1"
+    "launch-editor": "workspace:^"
   }
 }
