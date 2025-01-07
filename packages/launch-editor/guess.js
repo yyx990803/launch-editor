@@ -56,6 +56,8 @@ module.exports = function guessEditor (specifiedEditor) {
         }
       }
     } else if (process.platform === 'win32') {
+      // compatible for path with Chinese characters
+      childProcess.execSync('chcp 65001');
       const output = childProcess
         .execSync(
           'powershell -NoProfile -Command "Get-CimInstance -Query \\"select executablepath from win32_process where executablepath is not null\\" | % { $_.ExecutablePath }"',
