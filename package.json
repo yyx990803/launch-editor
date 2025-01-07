@@ -1,16 +1,15 @@
 {
+  "packageManager": "pnpm@9.15.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
+    "version-all": "pnpm -r exec npm version",
+    "publish-all": "pnpm -r publish",
     "lint": "eslint packages --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "eslint": "^9.5.0",
     "globals": "^15.6.0",
-    "lerna": "^2.5.1",
     "lint-staged": "^6.0.0",
     "yorkie": "^1.0.1"
   },
