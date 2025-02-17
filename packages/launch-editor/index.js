@@ -48,6 +48,11 @@ function isTerminalEditor (editor) {
 
 const positionRE = /:(\d+)(:(\d+))?$/
 function parseFile (file) {
+  // support `file://` protocol
+  if (file.startsWith('file://')) {
+    file = require('url').fileURLToPath(file)
+  }
+
   const fileName = file.replace(positionRE, '')
   const match = file.match(positionRE)
   const lineNumber = match && match[1]

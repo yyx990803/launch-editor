@@ -25,6 +25,7 @@ const launch = require('launch-editor')
 launch(
   // filename:line:column
   // both line and column are optional
+  // `file://` URIs are also supported
   'foo.js:12:34',
   // try specific editor bin first (optional)
   'code',
