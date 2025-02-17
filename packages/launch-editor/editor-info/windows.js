@@ -3,6 +3,7 @@ module.exports = [
   'Code.exe',
   'Code - Insiders.exe',
   'VSCodium.exe',
+  'Cursor.exe',
   'atom.exe',
   'sublime_text.exe',
   'notepad++.exe',
