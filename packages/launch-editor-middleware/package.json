@@ -3,6 +3,12 @@
   "version": "2.10.0",
   "description": "express middleware for launching editor",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yyx990803/launch-editor.git"

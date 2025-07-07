@@ -1,4 +1,3 @@
-const url = require('url')
 const path = require('path')
 const launch = require('launch-editor')
 
@@ -16,7 +15,18 @@ module.exports = (specifiedEditor, srcRoot, onErrorCallback) => {
   srcRoot = srcRoot || process.cwd()
 
   return function launchEditorMiddleware (req, res) {
-    const { file } = url.parse(req.url, true).query || {}
+    let url;
+
+    try {
+      url = new URL(req.url);
+    // eslint-disable-next-line no-unused-vars
+    } catch (_err) {
+      res.statusCode = 500;
+      res.end(`launch-editor-middleware: invalid URL.`)
+      return;
+    }
+
+    const file = url.searchParams.get("file");
     if (!file) {
       res.statusCode = 500
       res.end(`launch-editor-middleware: required query param "file" is missing.`)
