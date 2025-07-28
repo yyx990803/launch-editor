@@ -33,7 +33,8 @@ module.exports = (specifiedEditor, srcRoot, onErrorCallback) => {
         `launch-editor-middleware: required query param "file" is missing.`
       )
     } else {
-      launch(path.resolve(srcRoot, file), specifiedEditor, onErrorCallback)
+      const resolved = file.startsWith('file://') ? file : path.resolve(srcRoot, file)
+      launch(resolved, specifiedEditor, onErrorCallback)
       res.end()
     }
   }
