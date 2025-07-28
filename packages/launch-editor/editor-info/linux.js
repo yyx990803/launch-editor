@@ -5,6 +5,7 @@ module.exports = {
   code: 'code',
   vscodium: 'vscodium',
   codium: 'codium',
+  trae: 'trae',
   emacs: 'emacs',
   gvim: 'gvim',
   idea: 'idea',
