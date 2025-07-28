@@ -8,9 +8,10 @@ mock.module('launch-editor', {
 })
 const launchEditorMiddleware = require('./index.js');
 
+const STATUS_NOT_ALTERED = -1; 
 class MockResponse {
   constructor() {
-    this.statusCode = -1;
+    this.statusCode = STATUS_NOT_ALTERED;
     this.body = '';
   }
 
@@ -55,8 +56,7 @@ describe('launchEditorMiddleware', () => {
 
     middleware(req, res);
 
-    // -1 here means it was never set
-    assert.equal(res.statusCode, -1);
+    assert.equal(res.statusCode, STATUS_NOT_ALTERED);
     assert.equal(res.body, '');
   });
 
