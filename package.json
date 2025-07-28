@@ -8,11 +8,11 @@
     "lint": "eslint packages --fix"
   },
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
-    "eslint": "^9.5.0",
-    "globals": "^15.6.0",
-    "lint-staged": "^6.0.0",
-    "yorkie": "^1.0.1"
+    "@eslint/js": "^9.32.0",
+    "eslint": "^9.32.0",
+    "globals": "^16.3.0",
+    "lint-staged": "^6.1.1",
+    "yorkie": "^1.0.3"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
