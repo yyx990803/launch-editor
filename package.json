@@ -2,6 +2,7 @@
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
+    "test": "pnpm -r test",
     "version-all": "pnpm -r exec npm version",
     "publish-all": "pnpm -r publish",
     "lint": "eslint packages --fix"
