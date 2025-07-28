@@ -7,7 +7,7 @@
     "index.js"
   ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test --experimental-test-module-mocks"
   },
   "repository": {
     "type": "git",

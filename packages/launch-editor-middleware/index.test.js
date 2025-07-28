@@ -1,8 +1,12 @@
 const assert = require('node:assert/strict');
-const {describe, test} = require('node:test');
-const launchEditorMiddleware = require('./index.js');
+const {describe, test, mock} = require('node:test');
 
 const noop = () => {};
+
+mock.module('launch-editor', {
+  defaultExport: noop
+})
+const launchEditorMiddleware = require('./index.js');
 
 class MockResponse {
   constructor() {
@@ -45,7 +49,6 @@ describe('launchEditorMiddleware', () => {
       noop
     );
 
-    // this purposely doesn't exist so the launcher will bail early
     const file = 'mock/file:100';
     const req = new MockRequest(`https://localhost/?file=${file}`);
     const res = new MockResponse(null);
