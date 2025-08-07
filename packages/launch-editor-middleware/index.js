@@ -18,7 +18,8 @@ module.exports = (specifiedEditor, srcRoot, onErrorCallback) => {
     let url
 
     try {
-      url = new URL(req.url)
+      const fullUrl = req.url.startsWith('http') ? req.url : `http://localhost${req.url}`
+      url = new URL(fullUrl)
       // eslint-disable-next-line no-unused-vars
     } catch (_err) {
       res.statusCode = 500

@@ -81,4 +81,17 @@ describe('launchEditorMiddleware', () => {
     assert.equal(res.statusCode, 500)
     assert.equal(res.body, 'launch-editor-middleware: invalid URL.')
   })
+
+  test('correctly parse the url even if it contains only the path', async () => {
+    const middleware = launchEditorMiddleware('vim', undefined, noop)
+
+    const file = 'mock/file:100'
+    const req = new MockRequest(`/__open-in-editor?file=${file}`)
+    const res = new MockResponse(null)
+
+    middleware(req, res)
+
+    assert.equal(res.statusCode, STATUS_NOT_ALTERED)
+    assert.equal(res.body, '')
+  })
 })
