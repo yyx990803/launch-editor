@@ -1,6 +1,6 @@
 {
   "name": "launch-editor",
-  "version": "2.11.0",
+  "version": "2.11.1",
   "description": "launch editor from node.js",
   "main": "index.js",
   "repository": {
