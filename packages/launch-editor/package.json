@@ -3,6 +3,9 @@
   "version": "2.11.1",
   "description": "launch editor from node.js",
   "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yyx990803/launch-editor.git"
