@@ -62,6 +62,9 @@ module.exports = function getArgumentsForPosition (
     case 'rider':
     case 'rider64':
       return ['--line', lineNumber, '--column', columnNumber, fileName]
+    case 'devenv':
+    case 'visualstudio':
+      return ['/edit', fileName]
   }
 
   if (process.env.LAUNCH_EDITOR) {
