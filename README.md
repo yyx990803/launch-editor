@@ -80,7 +80,7 @@ To launch files, send requests to the server like the following:
 | `rubymine`      | [RubyMine](https://www.jetbrains.com/ruby/)                            |  ✓    |   ✓     |   ✓   |
 | `sublime`       | [Sublime Text](https://www.sublimetext.com/)                           |  ✓    |   ✓     |   ✓   |
 | `vim`           | [Vim](http://www.vim.org/)                                             |  ✓    |         |       |
-| `visualstudio`  | [Visual Studio](https://www.visualstudio.com/vs/)                      |       |         |   ✓   |
+| `visualstudio`  | [Visual Studio](https://www.visualstudio.com/vs/)                      |       |   ✓     |   ✓   |
 | `webstorm`      | [WebStorm](https://www.jetbrains.com/webstorm/)                        |  ✓    |   ✓     |   ✓   |
 | `zed`           | [Zed](https://zed.dev/)                                                |  ✓    |         |   ✓   |
 
