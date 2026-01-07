@@ -40,10 +40,11 @@ module.exports = function getArgumentsForPosition (
     case 'Code - Insiders':
     case 'codium':
     case 'trae':
-    case 'cursor':
     case 'vscodium':
     case 'VSCodium':
       return ['-r', '-g', `${fileName}:${lineNumber}:${columnNumber}`]
+    case 'cursor':
+      return ['-r', '-g', `"${fileName}:${lineNumber}:${columnNumber}"`]
     case 'appcode':
     case 'clion':
     case 'clion64':
