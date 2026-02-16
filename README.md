@@ -82,7 +82,7 @@ To launch files, send requests to the server like the following:
 | `vim`           | [Vim](http://www.vim.org/)                                             |  ✓    |         |       |
 | `visualstudio`  | [Visual Studio](https://www.visualstudio.com/vs/)                      |       |         |   ✓   |
 | `webstorm`      | [WebStorm](https://www.jetbrains.com/webstorm/)                        |  ✓    |   ✓     |   ✓   |
-| `zed`           | [Zed](https://zed.dev/)                                                |  ✓    |         |   ✓   |
+| `zed`           | [Zed](https://zed.dev/)                                                |  ✓    |   ✓     |   ✓   |
 
 ### Custom editor support
 
