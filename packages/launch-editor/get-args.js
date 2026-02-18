@@ -40,6 +40,7 @@ module.exports = function getArgumentsForPosition (
     case 'Code - Insiders':
     case 'codium':
     case 'trae':
+    case 'antigravity':
     case 'cursor':
     case 'vscodium':
     case 'VSCodium':
