@@ -11,7 +11,10 @@ module.exports = {
     '/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl',
   '/Applications/Sublime Text Dev.app/Contents/MacOS/Sublime Text':
     '/Applications/Sublime Text Dev.app/Contents/SharedSupport/bin/subl',
+  '/Applications/Visual Studio Code.app/Contents/MacOS/Code': 'code',
   '/Applications/Visual Studio Code.app/Contents/MacOS/Electron': 'code',
+  '/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Code - Insiders':
+    'code-insiders',
   '/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Electron':
     'code-insiders',
   '/Applications/VSCodium.app/Contents/MacOS/Electron': 'codium',
