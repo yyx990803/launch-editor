@@ -23,7 +23,7 @@ module.exports = [
   'goland64.exe',
   'rider.exe',
   'rider64.exe',
-  'trae.exe',
+  'Trae.exe',
   'zed.exe',
   'Antigravity.exe'
 ]
