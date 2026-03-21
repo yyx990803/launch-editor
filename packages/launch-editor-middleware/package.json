@@ -1,6 +1,6 @@
 {
   "name": "launch-editor-middleware",
-  "version": "2.13.1",
+  "version": "2.13.2",
   "description": "express middleware for launching editor",
   "main": "index.js",
   "files": [
