@@ -3,12 +3,12 @@
   "private": true,
   "scripts": {
     "test": "pnpm -r test",
-    "version-all": "pnpm -r exec npm version",
-    "publish-all": "pnpm -r publish",
+    "release": "bumpp",
     "lint": "eslint packages --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "bumpp": "^11.0.1",
     "eslint": "^9.32.0",
     "globals": "^16.3.0",
     "lint-staged": "^6.1.1",
